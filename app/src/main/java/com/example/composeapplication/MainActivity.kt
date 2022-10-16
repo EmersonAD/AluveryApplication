@@ -40,7 +40,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun ProductItem() {
     Surface(Modifier.padding(8.dp), shape = RoundedCornerShape(size = 16.dp), elevation = 4.dp) {
@@ -67,7 +66,7 @@ fun ProductItem() {
                     painter = painterResource(id = R.drawable.ic_dialog_alert),
                     contentDescription = "Product image",
                     modifier = Modifier
-                        .offset(y = imageSize/2)
+                        .offset(y = imageSize / 2)
                         .align(BottomCenter)
                         .size(imageSize)
                         .clip(CircleShape)
@@ -91,4 +90,28 @@ fun ProductItem() {
             }
         }
     }
+}
+
+@Composable
+fun ProductSection() {
+    Column {
+        Text(text = "Promoções")
+        Row {
+            ProductItem()
+            ProductItem()
+            ProductItem()
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProductSectionPreview() {
+    ProductSection()
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ProductItemPreview() {
+    ProductItem()
 }
