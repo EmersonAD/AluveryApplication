@@ -4,11 +4,8 @@ import android.R
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
@@ -37,10 +34,26 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposeApplicationTheme {
-                Surface {
-                    ProductSection()
-                }
+            App()
+        }
+    }
+}
+
+@Composable
+fun App() {
+    ComposeApplicationTheme {
+        Surface {
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Spacer(modifier = Modifier)
+                ProductSection()
+                ProductSection()
+                ProductSection()
+                Spacer(modifier = Modifier)
             }
         }
     }
@@ -101,7 +114,7 @@ fun ProductItem(product: Product) {
 
 @Composable
 fun ProductSection() {
-    Column(Modifier.padding(top = 16.dp)) {
+    Column {
         Text(
             modifier = Modifier.padding(start = 16.dp),
             fontSize = 16.sp,
@@ -110,7 +123,7 @@ fun ProductSection() {
         )
         Row(
             Modifier
-                .padding(top = 8.dp, bottom = 16.dp)
+                .padding(top = 8.dp)
                 .horizontalScroll(state = rememberScrollState()),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -157,4 +170,10 @@ private fun ProductItemPreview() {
             R.drawable.ic_delete
         )
     )
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun AppPreview() {
+    App()
 }
