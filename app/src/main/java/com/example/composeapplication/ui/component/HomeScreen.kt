@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.composeapplication.ui.mock.getMockProducts
 
 @Composable
 fun HomeScreen() {
@@ -20,9 +21,9 @@ fun HomeScreen() {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Spacer(modifier = Modifier)
-        ProductSection()
-        ProductSection()
-        ProductSection()
+        ProductSection("Promoções", getMockProducts())
+        ProductSection("Doces", getMockProducts())
+        ProductSection("Variados", getMockProducts())
         Spacer(modifier = Modifier)
     }
 }

@@ -10,19 +10,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.composeapplication.R
-import com.example.composeapplication.ui.extension.toBrazilianCurrency
+import com.example.composeapplication.ui.mock.getMockProducts
 import com.example.composeapplication.ui.model.Product
-import java.math.BigDecimal
 
 @Composable
-fun ProductSection() {
+fun ProductSection(title: String, products: List<Product>) {
     Column {
         Text(
             modifier = Modifier.padding(start = 16.dp),
             fontSize = 16.sp,
             fontWeight = FontWeight(400),
-            text = "Promoções"
+            text = title
         )
         Row(
             Modifier
@@ -31,27 +29,9 @@ fun ProductSection() {
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Spacer(Modifier)
-            ProductItem(
-                Product(
-                    "Hamburguer",
-                    BigDecimal(10.00).toBrazilianCurrency(),
-                    R.drawable.burger
-                )
-            )
-            ProductItem(
-                Product(
-                    "Pizza",
-                    BigDecimal(45.00).toBrazilianCurrency(),
-                    R.drawable.pizza
-                )
-            )
-            ProductItem(
-                Product(
-                    "Batata Frita",
-                    BigDecimal(6.00).toBrazilianCurrency(),
-                    R.drawable.fries
-                )
-            )
+            products.forEach { product: Product ->
+                ProductItem(product = product)
+            }
             Spacer(Modifier)
         }
     }
@@ -60,5 +40,7 @@ fun ProductSection() {
 @Preview(showBackground = true)
 @Composable
 private fun ProductSectionPreview() {
-    ProductSection()
+    ProductSection("Promoção", getMockProducts())
 }
+
+
